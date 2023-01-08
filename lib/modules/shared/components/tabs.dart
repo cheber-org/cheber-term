@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/shared/components/tappable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
 class CheberTabs extends StatefulWidget {
   const CheberTabs({
@@ -24,7 +21,8 @@ class CheberTabs extends StatefulWidget {
 class _CheberTabsState extends State<CheberTabs> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
       child: Row(
         children: [
           ...widget.tabs
@@ -99,13 +97,10 @@ class __TabItemState extends State<_TabItem> {
                   .toColor()
                   .withOpacity(isHover || widget.isActive ? 1 : 0)),
           child: Row(children: [
+            const SizedBox(width: 4),
             widget.child,
-            const SizedBox(
-              width: 8,
-            ),
-            _CloseBtn(
-              onClick: widget.onClose,
-            )
+            const SizedBox(width: 8),
+            _CloseBtn(onClick: widget.onClose),
           ]),
         ),
       ),
