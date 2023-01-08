@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/models/tab.dart';
 import 'package:cheber/modules/plugins/core/settings/view.dart';
 import 'package:cheber/modules/plugins/core/terminal/view.dart';
 import 'package:cheber/modules/shared/components/tabs.dart';
 import 'package:flutter/material.dart';
+
+import '../shared/components/window_bar.dart';
 
 class AreaManagerView extends StatefulWidget {
   const AreaManagerView({super.key});
@@ -63,22 +66,24 @@ class _AreaManagerViewState extends State<AreaManagerView> {
                 ),
               ),
             ),
-            height: 38,
+            height: Platform.isMacOS ? 38 : 32,
             padding: EdgeInsets.only(left: Platform.isMacOS ? 76 : 0),
-            child: CheberTabs(
-              onNewTab: () {
-                setState(() {
-                  final tabItem = TabItem(
-                      title: Text("Term ${tabs.length + 1}"),
-                      child: TermView());
-                  tabs.add(tabItem);
-                  selectedTab = tabItem;
-                });
-              },
-              active: selectedTab != null
-                  ? _tabs[tabs.indexOf(selectedTab!)]
-                  : null,
-              tabs: _tabs,
+            child: WindowBar(
+              tabs: CheberTabs(
+                onNewTab: () {
+                  setState(() {
+                    final tabItem = TabItem(
+                        title: Text("Term ${tabs.length + 1}"),
+                        child: const TermView());
+                    tabs.add(tabItem);
+                    selectedTab = tabItem;
+                  });
+                },
+                active: selectedTab != null
+                    ? _tabs[tabs.indexOf(selectedTab!)]
+                    : null,
+                tabs: _tabs,
+              ),
             ),
           ),
           Expanded(

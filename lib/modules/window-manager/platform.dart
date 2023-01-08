@@ -17,7 +17,7 @@ class WindowDecorations {
     await Window.hideTitle();
 
     await Window.setEffect(
-        effect: WindowEffect.acrylic, color: Colors.transparent);
+        effect: WindowEffect.aero, color: Colors.transparent);
     await Window.setBlurViewState(MacOSBlurViewState.active);
   }
 }
