@@ -17,6 +17,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppTheme(
       theme: solarizedTheme,
+      // theme: defaultCheberTheme,
       child: MaterialApp(
         title: 'Cheber',
         theme: lightTheme,

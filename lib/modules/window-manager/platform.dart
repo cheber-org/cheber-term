@@ -12,7 +12,7 @@ class WindowDecorations {
         toolbarStyle: MacOSToolbarStyle.unifiedCompact);
     Window.hideTitle();
 
-    await Window.setEffect(effect: WindowEffect.aero, color: Color(0xFFFFFFFF));
+    await Window.setEffect(effect: WindowEffect.aero, color: Color(0x00FFFFFF));
     await Window.setBlurViewState(MacOSBlurViewState.active);
   }
 }
