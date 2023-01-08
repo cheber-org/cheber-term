@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/models/tab.dart';
 import 'package:cheber/modules/plugins/core/settings/view.dart';
@@ -62,7 +64,7 @@ class _AreaManagerViewState extends State<AreaManagerView> {
               ),
             ),
             height: 38,
-            padding: const EdgeInsets.only(left: 76),
+            padding: EdgeInsets.only(left: Platform.isMacOS ? 76 : 0),
             child: CheberTabs(
               onNewTab: () {
                 setState(() {
