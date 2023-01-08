@@ -3,9 +3,9 @@ import 'package:cheber/modules/area-manager/view.dart';
 import 'package:cheber/modules/window-manager/platform.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WindowDecorations.setup();
+  await WindowDecorations.setup();
 
   runApp(const App());
 }

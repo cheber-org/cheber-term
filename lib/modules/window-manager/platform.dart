@@ -5,7 +5,6 @@ import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 class WindowDecorations {
   static Future<void> setup() async {
-    print("init");
     await Window.initialize();
     await Window.makeTitlebarTransparent();
     await Window.enableFullSizeContentView();
@@ -15,7 +14,7 @@ class WindowDecorations {
     }
     await Window.setToolbarStyle(
         toolbarStyle: MacOSToolbarStyle.unifiedCompact);
-    Window.hideTitle();
+    await Window.hideTitle();
 
     await Window.setEffect(
         effect: WindowEffect.acrylic, color: Colors.transparent);
