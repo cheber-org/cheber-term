@@ -96,7 +96,7 @@ _ShellCommand get _platformShell {
   }
 
   if (Platform.isWindows) {
-    return _ShellCommand('powershell.exe', []);
+    return _ShellCommand('cmd.exe', []);
   }
 
   final shell = Platform.environment['SHELL'] ?? 'sh';

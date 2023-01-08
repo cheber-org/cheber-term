@@ -1,4 +1,4 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 
 class WindowDecorations {
@@ -12,7 +12,8 @@ class WindowDecorations {
         toolbarStyle: MacOSToolbarStyle.unifiedCompact);
     Window.hideTitle();
 
-    await Window.setEffect(effect: WindowEffect.aero, color: Color(0x00FFFFFF));
+    await Window.setEffect(
+        effect: WindowEffect.acrylic, color: Colors.transparent);
     await Window.setBlurViewState(MacOSBlurViewState.active);
   }
 }
