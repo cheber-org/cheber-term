@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cheber/config/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pty/flutter_pty.dart';
 import 'package:xterm/xterm.dart';
@@ -15,6 +16,7 @@ class TermView extends StatefulWidget {
 class _TermViewState extends State<TermView> {
   Terminal terminal = Terminal(maxLines: 10000);
   final terminalController = TerminalController();
+  final scrollController = ScrollController();
   late final Pty pty;
 
   @override
@@ -26,6 +28,12 @@ class _TermViewState extends State<TermView> {
         if (mounted) _startPty();
       },
     );
+  }
+
+  @override
+  void dispose() {
+    pty.kill();
+    super.dispose();
   }
 
   void _startPty() {
@@ -57,11 +65,17 @@ class _TermViewState extends State<TermView> {
 
   @override
   Widget build(BuildContext context) {
-    return TerminalView(
-      terminal,
-      controller: terminalController,
-      autofocus: true,
-      backgroundOpacity: 0.7,
+    return ClipRRect(
+      child: TerminalView(
+        terminal,
+        padding: const EdgeInsets.all(5),
+        controller: terminalController,
+        autofocus: true,
+        scrollController: scrollController,
+        theme: AppTheme.of(context).toTerminalTheme(),
+        hardwareKeyboardOnly: true,
+        backgroundOpacity: 0.7,
+      ),
     );
   }
 }

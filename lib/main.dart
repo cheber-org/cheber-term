@@ -2,7 +2,6 @@ import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/view.dart';
 import 'package:cheber/modules/window-manager/platform.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,17 +15,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Cheber',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      debugShowCheckedModeBanner: false,
-      getPages: [
-        GetPage(
-          name: '/',
-          page: () => const AreaManagerView(),
-        ),
-      ],
+    return AppTheme(
+      theme: solarizedTheme,
+      child: MaterialApp(
+        title: 'Cheber',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (ctx) => const AreaManagerView(),
+        },
+      ),
     );
   }
 }
