@@ -71,6 +71,7 @@ class _TermViewState extends State<TermView> {
         padding: const EdgeInsets.all(5),
         controller: terminalController,
         autofocus: true,
+        simulateScroll: true,
         scrollController: scrollController,
         theme: AppTheme.of(context).toTerminalTheme(),
         hardwareKeyboardOnly: true,

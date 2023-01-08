@@ -1,5 +1,6 @@
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/models/tab.dart';
+import 'package:cheber/modules/plugins/core/settings/view.dart';
 import 'package:cheber/modules/plugins/core/terminal/view.dart';
 import 'package:cheber/modules/shared/components/tabs.dart';
 import 'package:flutter/material.dart';
@@ -14,14 +15,12 @@ class AreaManagerView extends StatefulWidget {
 class _AreaManagerViewState extends State<AreaManagerView> {
   List<TabItem> tabs = [
     const TabItem(title: Text("Term 1"), child: TermView()),
+    const TabItem(title: Text("Settings"), child: SettingsView()),
   ];
   late TabItem? selectedTab = tabs.isNotEmpty ? tabs.first : null;
 
   @override
   void initState() {
-    setState(() {
-      tabs.add(const TabItem(title: Text("Term 2"), child: TermView()));
-    });
     super.initState();
   }
 
@@ -51,7 +50,17 @@ class _AreaManagerViewState extends State<AreaManagerView> {
           child: Column(
         children: [
           Container(
-            decoration: BoxDecoration(color: AppTheme.of(context).background),
+            decoration: BoxDecoration(
+              color: AppTheme.of(context).background,
+              border: Border(
+                bottom: BorderSide(
+                  color: HSLColor.fromColor(AppTheme.of(context).background)
+                      .withLightness(0.15)
+                      .toColor()
+                      .withOpacity(1),
+                ),
+              ),
+            ),
             height: 38,
             padding: const EdgeInsets.only(left: 76),
             child: CheberTabs(
