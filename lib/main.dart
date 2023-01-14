@@ -1,3 +1,4 @@
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/view.dart';
 import 'package:cheber/modules/plugins/core/settings/model.dart';
@@ -15,6 +16,14 @@ void main() async {
   await GetStorage.init();
 
   runApp(const App());
+
+  doWhenWindowReady(() {
+    const initialSize = Size(600, 450);
+    appWindow.minSize = initialSize;
+    appWindow.size = initialSize;
+    appWindow.alignment = Alignment.center;
+    appWindow.show();
+  });
 }
 
 class App extends StatefulWidget {

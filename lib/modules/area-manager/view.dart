@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/models/tab.dart';
 import 'package:cheber/modules/plugins/core/settings/model.dart';
@@ -11,6 +12,8 @@ import 'package:cheber/modules/shared/components/tabs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+
+import '../shared/components/window_bar.dart';
 
 class AreaManagerView extends StatefulWidget {
   const AreaManagerView({super.key});
