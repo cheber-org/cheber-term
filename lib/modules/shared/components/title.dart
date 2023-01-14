@@ -8,7 +8,7 @@ class CheberTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 24,
       ),
     );

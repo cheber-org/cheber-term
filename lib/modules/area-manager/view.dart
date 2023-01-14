@@ -2,10 +2,15 @@ import 'dart:io';
 
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/area-manager/models/tab.dart';
+import 'package:cheber/modules/plugins/core/settings/model.dart';
 import 'package:cheber/modules/plugins/core/settings/view.dart';
 import 'package:cheber/modules/plugins/core/terminal/view.dart';
+import 'package:cheber/modules/shared/components/icon.dart';
+import 'package:cheber/modules/shared/components/icon_button.dart';
 import 'package:cheber/modules/shared/components/tabs.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
 
 class AreaManagerView extends StatefulWidget {
   const AreaManagerView({super.key});
@@ -17,7 +22,6 @@ class AreaManagerView extends StatefulWidget {
 class _AreaManagerViewState extends State<AreaManagerView> {
   List<TabItem> tabs = [
     const TabItem(title: Text("Term 1"), child: TermView()),
-    const TabItem(title: Text("Settings"), child: SettingsView()),
   ];
   late TabItem? selectedTab = tabs.isNotEmpty ? tabs.first : null;
 
@@ -53,41 +57,68 @@ class _AreaManagerViewState extends State<AreaManagerView> {
         children: [
           Container(
             decoration: BoxDecoration(
-              color: AppTheme.of(context).background,
+              color: SettingsProvider.of(context).theme.background,
               border: Border(
                 bottom: BorderSide(
-                  color: HSLColor.fromColor(AppTheme.of(context).background)
-                      .withLightness(0.15)
-                      .toColor()
-                      .withOpacity(1),
+                  color:
+                      ColorUtil(SettingsProvider.of(context).theme.background)
+                          .withAccent(0.15)
+                          .withOpacity(1),
                 ),
               ),
             ),
             height: 38,
-            padding: EdgeInsets.only(left: Platform.isMacOS ? 76 : 0),
-            child: CheberTabs(
-              onNewTab: () {
-                setState(() {
-                  final tabItem = TabItem(
-                      title: Text("Term ${tabs.length + 1}"),
-                      child: TermView());
-                  tabs.add(tabItem);
-                  selectedTab = tabItem;
-                });
-              },
-              active: selectedTab != null
-                  ? _tabs[tabs.indexOf(selectedTab!)]
-                  : null,
-              tabs: _tabs,
+            padding: EdgeInsets.only(left: Platform.isMacOS ? 76 : 0, right: 7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: CheberTabs(
+                    onNewTab: () {
+                      setState(() {
+                        final tabItem = TabItem(
+                            title: Text("Term ${tabs.length + 1}"),
+                            child: TermView());
+                        tabs.add(tabItem);
+                        selectedTab = tabItem;
+                      });
+                    },
+                    active:
+                        selectedTab != null && selectedTab?.child is TermView
+                            ? _tabs[tabs.indexOf(selectedTab!)]
+                            : null,
+                    tabs: _tabs,
+                  ),
+                ),
+                CheberIconButton(
+                  isActive: selectedTab?.child is SettingsView,
+                  onClick: () {
+                    setState(() {
+                      selectedTab = const TabItem(
+                        title: Text("Settings"),
+                        child: SettingsView(),
+                      );
+                    });
+                  },
+                  child: CheberIcon(CheberIcons.settings, size: 16),
+                )
+              ],
             ),
           ),
           Expanded(
               child: Stack(
             children: [
-              ...tabs.map((tab) => Offstage(
-                    offstage: selectedTab != tab,
-                    child: tab.child,
-                  ))
+              ...tabs.map(
+                (tab) => Offstage(
+                  offstage: selectedTab != tab,
+                  child: tab.child,
+                ),
+              ),
+              if (selectedTab?.child is SettingsView)
+                Offstage(
+                  offstage: false,
+                  child: selectedTab!.child,
+                )
             ],
           )),
         ],

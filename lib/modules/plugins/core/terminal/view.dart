@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cheber/config/theme.dart';
+import 'package:cheber/modules/plugins/core/settings/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pty/flutter_pty.dart';
 import 'package:xterm/xterm.dart';
@@ -71,9 +71,15 @@ class _TermViewState extends State<TermView> {
         padding: const EdgeInsets.all(5),
         controller: terminalController,
         autofocus: true,
+        textStyle: TerminalStyle.fromTextStyle(
+          TextStyle(
+            fontFamily:
+                SettingsProvider.of(context).terminalSettings.fontFamily,
+          ),
+        ),
         simulateScroll: true,
         scrollController: scrollController,
-        theme: AppTheme.of(context).toTerminalTheme(),
+        theme: SettingsProvider.of(context).theme.toTerminalTheme(),
         hardwareKeyboardOnly: true,
         backgroundOpacity: 0.7,
       ),
