@@ -1,4 +1,6 @@
 import 'package:cheber/config/theme.dart';
+import 'package:cheber/modules/plugins/core/settings/model.dart';
+import 'package:cheber/modules/shared/components/icon.dart';
 import 'package:cheber/modules/shared/components/tappable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -92,9 +94,8 @@ class __TabItemState extends State<_TabItem> {
           duration: const Duration(milliseconds: 100),
           padding: const EdgeInsets.symmetric(horizontal: 6),
           decoration: BoxDecoration(
-              color: HSLColor.fromColor(AppTheme.of(context).background)
-                  .withLightness(isPressed || widget.isActive ? 0.15 : 0.13)
-                  .toColor()
+              color: ColorUtil(SettingsProvider.of(context).theme.background)
+                  .withAccent(isPressed || widget.isActive ? 0.15 : 0.13)
                   .withOpacity(isHover || widget.isActive ? 1 : 0)),
           child: Row(children: [
             const SizedBox(width: 4),
@@ -111,7 +112,6 @@ class __TabItemState extends State<_TabItem> {
 class _AddTabBtn extends StatefulWidget {
   const _AddTabBtn({
     this.onClick,
-    super.key,
   });
   final Function()? onClick;
 
@@ -131,14 +131,13 @@ class __AddTabBtnState extends State<_AddTabBtn> {
         curve: Curves.easeInOut,
         padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
-          color: HSLColor.fromColor(AppTheme.of(context).background)
-              .withLightness(0.13)
-              .toColor()
+          color: ColorUtil(SettingsProvider.of(context).theme.background)
+              .withAccent(0.13)
               .withOpacity(isHover ? 1 : 0),
         ),
-        child: const Icon(
-          CupertinoIcons.add,
-          size: 14,
+        child: const CheberIcon(
+          CheberIcons.plus,
+          size: 16,
         ),
       ),
     );
@@ -148,7 +147,6 @@ class __AddTabBtnState extends State<_AddTabBtn> {
 class _CloseBtn extends StatefulWidget {
   const _CloseBtn({
     this.onClick,
-    super.key,
   });
   final Function()? onClick;
 
@@ -170,15 +168,14 @@ class __CloseBtnState extends State<_CloseBtn> {
         curve: Curves.easeInOut,
         padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          color: HSLColor.fromColor(AppTheme.of(context).background)
-              .withLightness(0.2)
-              .toColor()
+          color: ColorUtil(SettingsProvider.of(context).theme.background)
+              .withAccent(0.2)
               .withOpacity(isHover ? 1 : 0),
           borderRadius: BorderRadius.circular(4),
         ),
-        child: const Icon(
-          CupertinoIcons.clear,
-          size: 14,
+        child: const CheberIcon(
+          CheberIcons.x,
+          size: 16,
         ),
       ),
     );
