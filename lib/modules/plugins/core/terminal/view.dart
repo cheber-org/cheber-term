@@ -73,6 +73,7 @@ class _TermViewState extends State<TermView> {
         autofocus: true,
         textStyle: TerminalStyle.fromTextStyle(
           TextStyle(
+            fontSize: SettingsProvider.of(context).terminalSettings.fontSize,
             fontFamily:
                 SettingsProvider.of(context).terminalSettings.fontFamily,
           ),

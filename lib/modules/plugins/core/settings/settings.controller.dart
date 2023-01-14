@@ -19,7 +19,9 @@ class SettingsController extends GetxController {
   setTerminalSettings(TerminalSettings settings) async {
     terminalSettings.value = settings;
     await storageServide.write(
-        "terminalSettings", terminalSettings.value.toMap());
+      "terminalSettings",
+      terminalSettings.value.toMap(),
+    );
 
     Get.showSnackbar(CheberSnackbar(message: "Settings changed"));
   }

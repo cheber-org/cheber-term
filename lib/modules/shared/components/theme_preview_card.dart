@@ -82,6 +82,14 @@ class _ThemePreviewCardState extends State<ThemePreviewCard> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
             color: ColorUtil(theme.background).withAccent(0.1),
+            boxShadow: [
+              BoxShadow(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .secondary
+                      .withOpacity(widget.isActive ? 0.12 : 0),
+                  spreadRadius: 4),
+            ],
             border: Border.all(
               width: 2,
               color: (widget.isActive

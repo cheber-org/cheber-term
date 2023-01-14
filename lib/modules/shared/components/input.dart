@@ -1,18 +1,22 @@
 import 'package:cheber/config/theme.dart';
 import 'package:cheber/modules/plugins/core/settings/model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CheberInput extends StatefulWidget {
   const CheberInput({
     this.placeholder,
     this.value,
     this.onChanged,
+    this.formatters,
     super.key,
   });
 
   final String? placeholder;
   final String? value;
   final Function(String)? onChanged;
+  final List<TextInputFormatter>? formatters;
+  // final
 
   @override
   State<CheberInput> createState() => _CheberInputState();
@@ -42,6 +46,7 @@ class _CheberInputState extends State<CheberInput> {
       ),
       child: TextField(
         controller: controller,
+        inputFormatters: widget.formatters,
         style: const TextStyle(fontSize: 14),
         decoration: InputDecoration.collapsed(
           hintText: widget.placeholder,

@@ -5,13 +5,17 @@ import '../../../themes/models.dart';
 class TerminalSettings {
   TerminalSettings({
     this.fontFamily,
+    this.fontSize = 12,
   });
+
   String? fontFamily;
+  double fontSize;
 
   static TerminalSettings fromMap(Map data) {
     try {
       return TerminalSettings(
         fontFamily: data['fontFamily'],
+        fontSize: data['fontSize'],
       );
     } catch (_) {
       return TerminalSettings();
@@ -21,6 +25,7 @@ class TerminalSettings {
   Map toMap() {
     return {
       'fontFamily': fontFamily,
+      'fontSize': fontSize,
     };
   }
 }

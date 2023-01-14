@@ -3,6 +3,7 @@ import 'package:cheber/modules/plugins/core/settings/components/settings_page.da
 import 'package:cheber/modules/shared/components/input.dart';
 import 'package:cheber/modules/shared/components/title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../model.dart';
 import '../settings.controller.dart';
@@ -19,10 +20,13 @@ class _GeneralSettingsState extends State<GeneralSettings> {
 
   late String fontFamily =
       settingsController.terminalSettings.value.fontFamily ?? '';
+  late double fontSize = settingsController.terminalSettings.value.fontSize;
 
   onSave() {
-    settingsController
-        .setTerminalSettings(TerminalSettings(fontFamily: fontFamily));
+    settingsController.setTerminalSettings(TerminalSettings(
+      fontFamily: fontFamily,
+      fontSize: fontSize,
+    ));
   }
 
   @override
@@ -33,6 +37,23 @@ class _GeneralSettingsState extends State<GeneralSettings> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const CheberTitle("Settings"),
+          const SizedBox(
+            height: 10,
+          ),
+          CheberInput(
+              placeholder: "Font size",
+              value: fontSize.toString(),
+              formatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}$'))
+              ],
+              onChanged: (value) {
+                var newValue = double.tryParse(value);
+                if (newValue != null) {
+                  setState(() {
+                    fontSize = newValue;
+                  });
+                }
+              }),
           const SizedBox(
             height: 10,
           ),
