@@ -6,23 +6,23 @@ import 'model.dart';
 
 class SettingsController extends GetxController {
   final terminalSettings = Rx(TerminalSettings());
-  final storageServide = Get.put(StorageService());
+  final storageService = Get.put(StorageService());
 
   @override
   onInit() async {
     terminalSettings.value = TerminalSettings.fromMap(
-      await storageServide.read("terminalSettings") ?? {},
+      await storageService.read("terminalSettings") ?? {},
     );
     super.onInit();
   }
 
   setTerminalSettings(TerminalSettings settings) async {
     terminalSettings.value = settings;
-    await storageServide.write(
+    await storageService.write(
       "terminalSettings",
       terminalSettings.value.toMap(),
     );
-
+    await Get.closeCurrentSnackbar();
     Get.showSnackbar(CheberSnackbar(message: "Settings changed"));
   }
 }

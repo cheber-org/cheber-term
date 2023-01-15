@@ -67,10 +67,10 @@ class ThemesController extends GetxController {
     this.themes.assignAll(themes);
   }
 
-  setCurrentTheme(CheberTheme theme) {
-    if (theme != currentTheme.value) {
-      currentTheme.value = theme;
-    }
+  setCurrentTheme(CheberTheme theme) async {
+    if (theme == currentTheme.value) return;
+    currentTheme.value = theme;
+    await Get.closeCurrentSnackbar();
     Get.showSnackbar(
       CheberSnackbar(
         message: "Theme changed",
